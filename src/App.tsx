@@ -9,7 +9,7 @@ function App() {
     const tables1 = () =>{
         const t1: ITable = {
             id: '1',
-            name: 'name_1',
+            name: 'fsdfsd sdf sd fsd fsd f sdf name_1',
         };
         const t2: ITable = {
             id: '2',
