@@ -1,12 +1,33 @@
 import React from 'react';
 import {AppHiderBar} from "./component/AppHiderBar";
-import {AdminDrawer} from "./component/AdminDrawer";
+import {AdminDrawer, ITable, ITables} from "./component/AdminDrawer";
+
+
+
 
 function App() {
+    const tables1 = () =>{
+        const t1: ITable = {
+            id: '1',
+            name: 'name_1',
+        };
+        const t2: ITable = {
+            id: '2',
+            name: 'name_2',
+        };
+
+        const tables: ITables = {
+            tablesss:  [t1, t2]
+    }
+
+        return tables
+    }
+
+
     return (
         <>
             <AppHiderBar/>
-            <AdminDrawer/>
+            <AdminDrawer tablesss={tables1().tablesss}/>
         </>
     )
 }
