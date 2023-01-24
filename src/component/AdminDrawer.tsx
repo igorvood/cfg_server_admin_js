@@ -1,5 +1,5 @@
 import React from "react";
-import {Drawer, MenuItem} from "@mui/material";
+import {Divider, Drawer, MenuItem} from "@mui/material";
 import {useAppSelector} from "../hooks/redux";
 import {useActions} from "../hooks/actions";
 import {useTablesSetQuery} from "../store/cfg/tracer.api";
@@ -31,8 +31,14 @@ export function AdminDrawer() {
             {isErrorTables && <p className="text-center text-red-600">Не удалось получить список таблиц</p>}
 
             {tablesList && tablesList
-                .map(table => <MenuItem key={table.id} onClick={()=>clickTableHandler(table.id)}
-            >{table.name}</MenuItem>)}
+                .map(table =><> <MenuItem key={table.id} onClick={()=>clickTableHandler(table.id)}
+                    >{table.name}</MenuItem>
+                <Divider absolute={false}/>
+                </>
+                )
+
+
+            }
         </Drawer>
     )
 }
