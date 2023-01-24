@@ -1,6 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import { DataGrid } from '@mui/x-data-grid';
+import {DataGrid, GridToolbar} from '@mui/x-data-grid';
 import {Grid} from "@mui/material";
 import {useDemoData} from "@mui/x-data-grid-generator";
 
@@ -13,13 +13,14 @@ export function EditorTable() {
             field: 'rating',
             headerName: 'Rating',
             type: 'number',
-            width: 140,
+            // width: 140,
         },
         {
             field: 'dateCreated',
             headerName: 'Created on',
-            width: 180,
+            // width: 180,
             type: 'date',
+            editable: true
         },
         {
             field: 'isAdmin',
@@ -32,13 +33,21 @@ export function EditorTable() {
 
         const {data} = useDemoData({
             dataSet: 'Employee',
-            rowLength: 10,
+            rowLength: 1000,
         });
 
-
         return (
-        <div style={{ height: 400, width: '100%' }}>
-            <DataGrid rows={data.rows} columns={columns} />
+        <div style={{ height: 1000, width: '100%'  }}>
+
+            <DataGrid rows={data.rows}
+                      columns={columns}
+                      onCellClick={() => console.log(data)}
+                      autoHeight
+                      checkboxSelection
+                      components={{
+                          Toolbar: GridToolbar,
+                      }}
+            />
             {/*<Grid rows={data.rows} columns={columns} />*/}
             {/*<Grid  />*/}
         </div>
