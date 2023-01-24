@@ -7,7 +7,8 @@ interface AdminState {
 }
 
 const initialState: AdminState = {
-  isTableListOpen: JSON.parse(localStorage.getItem(LS_IS_TABLE_LIST_OPEN) ?? '{'+LS_IS_TABLE_LIST_OPEN+': false}')
+  isTableListOpen: JSON.parse(localStorage.getItem(LS_IS_TABLE_LIST_OPEN) ?? 'false')
+
 }
 
 export const adminSlice = createSlice({

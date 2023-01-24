@@ -1,6 +1,7 @@
 import React from 'react';
 import {AppHiderBar} from "./component/AppHiderBar";
 import {AdminDrawer, ITable, ITables} from "./component/AdminDrawer";
+import {useTablesSetQuery} from "./store/cfg/tracer.api";
 
 
 
@@ -23,6 +24,11 @@ function App() {
         return tables
     }
 
+    const {isLoading: isLoadingGraph, isError: isErrorGraph, data: graph} = useTablesSetQuery()
+
+// const x = () => {
+//   console.log(graph)
+// }
 
     return (
         <>

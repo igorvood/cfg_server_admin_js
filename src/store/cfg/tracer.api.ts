@@ -1,17 +1,18 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
+import {ITable} from "../../component/AdminDrawer";
 
 
 export const cfgApi = createApi({
     reducerPath: 'configuration/Api',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'http://localhost:8080/'
+        baseUrl: 'http://localhost:9091/'
     }),
     endpoints: build => ({
-        // getGraphByGroup: build.query<IGraph, string>({
-        //     query: (groupName: string) => ({
-        //         url: `arrows/byGroup/${groupName}`
-        //     })
-        // }),
+        tablesSet: build.query<ITable[], void>({
+            query: () => ({
+                url: `tablesList`
+            })
+        }),
         // invalidateGroup: build.query<void, string>({
         //     query: (groupName: string) => ({
         //         url: `invalidate/${groupName}`
@@ -31,6 +32,6 @@ export const cfgApi = createApi({
 
 })
 
-// export const {useLazyGetGraphByGroupQuery} = tracerApi
+export const {useTablesSetQuery , useLazyTablesSetQuery} = cfgApi
 // export const {useGroupListLikeQuery} = tracerApi
 // export const {useLazyInvalidateGroupQuery} = tracerApi
