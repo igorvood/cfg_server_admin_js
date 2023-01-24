@@ -2,6 +2,7 @@ import React from "react";
 import {Drawer, MenuItem} from "@mui/material";
 import {useAppSelector} from "../hooks/redux";
 import {useActions} from "../hooks/actions";
+import {useTablesSetQuery} from "../store/cfg/tracer.api";
 
 export interface ITable{
     id: string
@@ -12,19 +13,26 @@ export interface ITables{
     tablesss: ITable[]
 }
 
-export function AdminDrawer({tablesss}: ITables) {
+export function AdminDrawer() {
+
+    const {isLoading: isLoadingTables, isError: isErrorTables, data: tablesList} = useTablesSetQuery()
 
     const {isTableListOpen} = useAppSelector(state => state.adminReducer)
     const {isTableListOpenGlobalState} = useActions();
+
+    const clickTableHandler = (tableId: string) => {
+        isTableListOpenGlobalState(false)
+    }
+
     return (
         <Drawer open={isTableListOpen}
                 >
-            {tablesss && tablesss
-                .map(table => <MenuItem key={table.id} onClick={()=>isTableListOpenGlobalState(false)}
+            {isLoadingTables && <p className="text-center">Tables list is loading...</p>}
+            {isErrorTables && <p className="text-center text-red-600">Не удалось получить список таблиц</p>}
+
+            {tablesList && tablesList
+                .map(table => <MenuItem key={table.id} onClick={()=>clickTableHandler(table.id)}
             >{table.name}</MenuItem>)}
-            <MenuItem onClick={()=>isTableListOpenGlobalState(false)}
-            >item 1</MenuItem>
-            <MenuItem  onClick={()=>isTableListOpenGlobalState(false)}>item 2</MenuItem>
         </Drawer>
     )
 }

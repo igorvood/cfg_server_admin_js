@@ -7,12 +7,10 @@ import {useTablesSetQuery} from "./store/cfg/tracer.api";
 
 
 function App() {
-    const {isLoading: isLoadingTables, isError: isErrorTables, data: tablesList} = useTablesSetQuery()
-
     return (
         <>
             <AppHeaderBar/>
-            <AdminDrawer tablesss={tablesList??[]}/>
+            <AdminDrawer />
         </>
     )
 }
