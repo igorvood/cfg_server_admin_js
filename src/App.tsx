@@ -24,16 +24,12 @@ function App() {
         return tables
     }
 
-    const {isLoading: isLoadingGraph, isError: isErrorGraph, data: graph} = useTablesSetQuery()
-
-// const x = () => {
-//   console.log(graph)
-// }
+    const {isLoading: isLoadingGraph, isError: isErrorGraph, data: tablesList} = useTablesSetQuery()
 
     return (
         <>
             <AppHiderBar/>
-            <AdminDrawer tablesss={tables1().tablesss}/>
+            <AdminDrawer tablesss={tablesList??[]}/>
         </>
     )
 }
