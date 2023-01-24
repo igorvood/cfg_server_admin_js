@@ -5,7 +5,7 @@ import {useActions} from "../hooks/actions";
 import {useAppSelector} from "../hooks/redux";
 
 
-export function AppHiderBar() {
+export function AppHeaderBar() {
 
     const {isTableListOpen} = useAppSelector(state => state.adminReducer)
     const {isTableListOpenGlobalState} = useActions();
