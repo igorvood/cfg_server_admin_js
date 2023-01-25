@@ -2,7 +2,7 @@ import React from "react";
 import {Divider, Drawer, MenuItem} from "@mui/material";
 import {useAppSelector} from "../hooks/redux";
 import {useActions} from "../hooks/actions";
-import {useTablesSetQuery} from "../store/cfg/tracer.api";
+import {useTablesSetQuery} from "../store/cfg/admin.api";
 
 export interface ITable{
     id: string

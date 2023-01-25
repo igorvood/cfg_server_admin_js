@@ -2,7 +2,7 @@ import {configureStore} from '@reduxjs/toolkit'
 
 import {setupListeners} from '@reduxjs/toolkit/query'
 import {adminReducer} from "./cfg/adminSlice";
-import {cfgApi} from "./cfg/tracer.api";
+import {cfgApi} from "./cfg/admin.api";
 
 
 export const store = configureStore({

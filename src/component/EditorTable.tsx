@@ -1,14 +1,21 @@
 import React from "react";
-import {DataGrid, GridOverlay, GridToolbar} from '@mui/x-data-grid';
-import {LinearProgress} from "@mui/material";
+import {DataGrid, GridColumns, GridOverlay, GridToolbar} from '@mui/x-data-grid';
+import {Box, LinearProgress} from "@mui/material";
 import {useDemoData} from "@mui/x-data-grid-generator";
+import {useLazyTableDataQuery, useTableDataQuery} from "../store/cfg/admin.api";
 
 export function EditorTable() {
 
 
-    const columns = [
-        {field: 'name', headerName: 'Name', width: 180,
-            editable: true, type: 'string'},
+    const columns : GridColumns= [
+        {field: 'name',
+            headerName: 'Name',
+            width: 180,
+            editable: true,
+            type: 'string',
+            cellClassName: 'super-app-theme--cell',
+
+        },
         {
             field: 'rating',
             headerName: 'Rating',
@@ -44,13 +51,39 @@ export function EditorTable() {
         dataSet: 'Employee',
         rowLength: 1000,
     });
-
+    const { isLoading: isLoadingGraph, isError: isErrorGraph, data: graph} = useTableDataQuery('dict_arrow')
     return (
         <div style={{height: 1000, width: '100%'}}>
-
+            <Box
+                sx={{
+                    height: 300,
+                    width: '100%',
+                    '& .super-app-theme--cell': {
+                        backgroundColor: 'rgba(71,63,48,0.55)',
+                        color: '#1a3e72',
+                        fontWeight: '600',
+                    },
+                    '& .super-app.negative': {
+                        backgroundColor: 'rgba(157, 255, 118, 0.49)',
+                        color: '#1a3e72',
+                        fontWeight: '600',
+                    },
+                    '& .super-app.positive': {
+                        backgroundColor: '#d47483',
+                        color: '#1a3e72',
+                        fontWeight: '600',
+                    },
+                }}
+            >
             <DataGrid rows={data.rows}
                       columns={columns}
-                      // onCellClick={() => console.log(data)}
+                      onCellClick={() => {
+                          // console.log(data)
+
+                          console.log(graph)
+                      }
+                        }
+
                       autoHeight
                       checkboxSelection
                       components={{
@@ -62,8 +95,11 @@ export function EditorTable() {
                           console.log("event => " , event)
                           console.log("details => " , details)
                       }
+
                       }
+
             />
+            </Box>
         </div>
     )
 }

@@ -1,5 +1,7 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import {ITable} from "../../component/AdminDrawer";
+import {ServerResponse} from "http";
+import {ITableData} from "../../models/table.model";
 
 
 export const cfgApi = createApi({
@@ -12,6 +14,12 @@ export const cfgApi = createApi({
             query: () => ({
                 url: `tablesList`
             })
+        }),
+        tableData: build.query<ITableData, string>({
+            query: (tableName: string) => ({
+                url: `/tableData/${tableName}`
+            }),
+            // transformResponse: (response: ServerResponse<any>) => response.items
         }),
         // invalidateGroup: build.query<void, string>({
         //     query: (groupName: string) => ({
@@ -33,5 +41,6 @@ export const cfgApi = createApi({
 })
 
 export const {useTablesSetQuery , useLazyTablesSetQuery} = cfgApi
+export const {useTableDataQuery , useLazyTableDataQuery} = cfgApi
 // export const {useGroupListLikeQuery} = tracerApi
 // export const {useLazyInvalidateGroupQuery} = tracerApi
