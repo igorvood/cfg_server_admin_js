@@ -1,14 +1,13 @@
 import React from "react";
-import {Link} from "react-router-dom";
-import {DataGrid, GridToolbar} from '@mui/x-data-grid';
-import {Grid} from "@mui/material";
+import {DataGrid, GridOverlay, GridToolbar} from '@mui/x-data-grid';
+import {LinearProgress} from "@mui/material";
 import {useDemoData} from "@mui/x-data-grid-generator";
 
 export function EditorTable() {
 
 
     const columns = [
-        { field: 'name', headerName: 'Name', width: 180 },
+        {field: 'name', headerName: 'Name', width: 180},
         {
             field: 'rating',
             headerName: 'Rating',
@@ -30,14 +29,23 @@ export function EditorTable() {
         },
     ];
 
-
-        const {data} = useDemoData({
-            dataSet: 'Employee',
-            rowLength: 1000,
-        });
-
+    function CustomLoadingOverlay() {
         return (
-        <div style={{ height: 1000, width: '100%'  }}>
+            <GridOverlay>
+                <div style={{position: 'absolute', top: 0, width: '100%'}}>
+                    <LinearProgress/>
+                </div>
+            </GridOverlay>
+        );
+    }
+
+    const {data} = useDemoData({
+        dataSet: 'Employee',
+        rowLength: 1000,
+    });
+
+    return (
+        <div style={{height: 1000, width: '100%'}}>
 
             <DataGrid rows={data.rows}
                       columns={columns}
@@ -46,10 +54,9 @@ export function EditorTable() {
                       checkboxSelection
                       components={{
                           Toolbar: GridToolbar,
+                          LoadingOverlay: CustomLoadingOverlay,
                       }}
             />
-            {/*<Grid rows={data.rows} columns={columns} />*/}
-            {/*<Grid  />*/}
         </div>
     )
 }
