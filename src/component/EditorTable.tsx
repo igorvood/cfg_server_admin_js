@@ -7,7 +7,8 @@ export function EditorTable() {
 
 
     const columns = [
-        {field: 'name', headerName: 'Name', width: 180},
+        {field: 'name', headerName: 'Name', width: 180,
+            editable: true, type: 'string'},
         {
             field: 'rating',
             headerName: 'Rating',
@@ -49,13 +50,19 @@ export function EditorTable() {
 
             <DataGrid rows={data.rows}
                       columns={columns}
-                      onCellClick={() => console.log(data)}
+                      // onCellClick={() => console.log(data)}
                       autoHeight
                       checkboxSelection
                       components={{
                           Toolbar: GridToolbar,
                           LoadingOverlay: CustomLoadingOverlay,
                       }}
+                      onCellEditCommit={(params, event, details) => {
+                          console.log("params => ", params)
+                          console.log("event => " , event)
+                          console.log("details => " , details)
+                      }
+                      }
             />
         </div>
     )
