@@ -18,9 +18,10 @@ export function AdminDrawer() {
     const {isLoading: isLoadingTables, isError: isErrorTables, data: tablesList} = useTablesSetQuery()
 
     const {isTableListOpen} = useAppSelector(state => state.adminReducer)
-    const {isTableListOpenGlobalState} = useActions();
+    const {isTableListOpenGlobalState, currentTableNameGlobalState} = useActions();
 
     const clickTableHandler = (tableId: string) => {
+        currentTableNameGlobalState(tableId)
         isTableListOpenGlobalState(false)
     }
 
@@ -36,8 +37,6 @@ export function AdminDrawer() {
                 <Divider absolute={false} key={'Divider'+table.id}/>
                 </div>
                 )
-
-
             }
         </Drawer>
     )

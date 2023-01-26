@@ -4,12 +4,12 @@ import {useTableDataQuery} from "../store/cfg/admin.api";
 import {ITableData} from "../models/table.model";
 import {GridEnrichedColDef} from "@mui/x-data-grid/models/colDef/gridColDef";
 import {Box} from "@mui/material";
+import {useAppSelector} from "../hooks/redux";
 
 
 export function NewEditorTable() {
 
-    const tableName = 'dict_arrow'
-
+    const {currentTableName: tableName} = useAppSelector(state => state.adminReducer)
     const {isLoading: isLoadingTableData, isError: isErrorTableData, data: tableData} = useTableDataQuery(tableName)
 
 
@@ -92,8 +92,7 @@ export function NewEditorTable() {
                               rows={getColumnsData(tableData)}
                               columns={getColumns(tableData)}
                               rowsPerPageOptions={[5, 10, 20, 50, 100]}
-                              pageSize={10}
-
+                              pageSize={20}
                     />
                 </Box>
             }
