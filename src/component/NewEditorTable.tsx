@@ -56,7 +56,7 @@ export function NewEditorTable() {
 
     return (
         <div style={{height: 1000, width: '100%'}}>
-            {isLoadingTableData && <p className="text-center">Loading...</p>}
+            {isLoadingTableData && <p className="text-center ">Loading...</p>}
             {isErrorTableData && <p className="text-center text-red-600">Не удалось получить данные по таблице</p>}
             {!isLoadingTableData && tableData &&
                 <Box
@@ -79,7 +79,7 @@ export function NewEditorTable() {
                             fontWeight: '600',
                         },
                     }}
-                ><h4 className="text-center">{tableData.tableComment + " ("+tableData.tableId+")"}</h4>
+                ><h4 className="text-center text-green-800">{tableData.tableComment + " ("+tableData.tableId+")"}</h4>
                     <DataGrid autoHeight
                               checkboxSelection
                               style={{flex: 1}}
