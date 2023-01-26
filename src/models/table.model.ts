@@ -25,6 +25,8 @@ export interface INewTableData {
 }
 
 export interface ITableData {
+    tableId: string;
+    tableComment: string;
     columns: IColumn[];
     tableData: INewTableData[];
 }

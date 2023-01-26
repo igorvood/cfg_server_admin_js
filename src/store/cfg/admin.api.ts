@@ -1,7 +1,7 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import {ITable} from "../../component/AdminDrawer";
 import {ServerResponse} from "http";
-import {IDeleteTableData, ITableData} from "../../models/table.model";
+import { ITableData} from "../../models/table.model";
 
 
 export const cfgApi = createApi({

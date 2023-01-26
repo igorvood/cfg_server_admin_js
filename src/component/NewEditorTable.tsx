@@ -3,7 +3,7 @@ import {DataGrid, GridToolbar} from "@mui/x-data-grid";
 import {useTableDataQuery} from "../store/cfg/admin.api";
 import {ITableData} from "../models/table.model";
 import {GridEnrichedColDef} from "@mui/x-data-grid/models/colDef/gridColDef";
-import {GridToolbarColumnsButton} from "@mui/x-data-grid/components/toolbar/GridToolbarColumnsButton";
+import {Box} from "@mui/material";
 
 
 export function NewEditorTable() {
@@ -11,19 +11,23 @@ export function NewEditorTable() {
 
 
     const getColumns = (td: ITableData) => {
+        let number = 100 / td.columns.length;
         const cols = td.columns
-            .map(col => {
+            .map((col, index) => {
                     const c: GridEnrichedColDef<any> = {
                         field: col.name,
                         type: 'string',
                         headerName: col.columnComment,
                         editable: !col.isInPrimaryKey,
-                        width: 200,
+                        // width: '${number}%',
+                        // minWidth: '${number}%',
+                        flex: 1,
+                        minWidth: 100,
+                        cellClassName: col.isInPrimaryKey ? 'super-app-theme--no_edit_cell' : undefined,
                     }
                     return c;
                 }
             )
-            .sort(q => q.editable===true? 1: 0)
         return cols as GridEnrichedColDef<any>[]
     }
 
@@ -55,16 +59,40 @@ export function NewEditorTable() {
             {isLoadingTableData && <p className="text-center">Loading...</p>}
             {isErrorTableData && <p className="text-center text-red-600">Не удалось получить данные по таблице</p>}
             {!isLoadingTableData && tableData &&
-                <DataGrid autoHeight
-                          checkboxSelection
-                          components={{
-                              Toolbar: GridToolbar,
-                          }}
-                          rows={getColumnsData(tableData)}
-                          columns={getColumns(tableData)}
+                <Box
+                    sx={{
+                        height: 300,
+                        width: '100%',
+                        '& .super-app-theme--no_edit_cell': {
+                            backgroundColor: 'rgba(138,128,114,0.55)',
+                            color: '#1a3e72',
+                            fontWeight: '600',
+                        },
+                        '& .super-app.negative': {
+                            backgroundColor: 'rgba(157, 255, 118, 0.49)',
+                            color: '#1a3e72',
+                            fontWeight: '600',
+                        },
+                        '& .super-app.positive': {
+                            backgroundColor: '#d47483',
+                            color: '#1a3e72',
+                            fontWeight: '600',
+                        },
+                    }}
+                ><h4 className="text-center">{tableData.tableComment + " ("+tableData.tableId+")"}</h4>
+                    <DataGrid autoHeight
+                              checkboxSelection
+                              style={{flex: 1}}
+                              components={{
+                                  Toolbar: GridToolbar,
+                              }}
+                              rows={getColumnsData(tableData)}
+                              columns={getColumns(tableData)}
+                              rowsPerPageOptions={[5, 10, 20, 50, 100]}
+                              pageSize={10}
 
-
-                />
+                    />
+                </Box>
             }
         </div>
     )
