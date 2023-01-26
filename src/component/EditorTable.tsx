@@ -3,6 +3,7 @@ import {DataGrid, GridColumns, GridOverlay, GridToolbar} from '@mui/x-data-grid'
 import {Box, LinearProgress} from "@mui/material";
 import {useDemoData} from "@mui/x-data-grid-generator";
 import {useLazyTableDataQuery, useTableDataQuery} from "../store/cfg/admin.api";
+import {GridEnrichedColDef} from "@mui/x-data-grid/models/colDef/gridColDef";
 
 export function EditorTable() {
 
@@ -36,6 +37,10 @@ export function EditorTable() {
             type: 'boolean',
         },
     ];
+
+    const asdsad = () => {
+        let columns1: GridEnrichedColDef<any>[] = columns;
+    }
 
     function CustomLoadingOverlay() {
         return (

@@ -31,10 +31,10 @@ export function AdminDrawer() {
             {isErrorTables && <p className="text-center text-red-600">Не удалось получить список таблиц</p>}
 
             {tablesList && tablesList
-                .map(table =><> <MenuItem key={table.id} onClick={()=>clickTableHandler(table.id)}
+                .map(table =><div key={'div'+table.id}> <MenuItem key={table.id} onClick={()=>clickTableHandler(table.id)}
                     >{table.name}</MenuItem>
-                <Divider absolute={false}/>
-                </>
+                <Divider absolute={false} key={'Divider'+table.id}/>
+                </div>
                 )
 
 
