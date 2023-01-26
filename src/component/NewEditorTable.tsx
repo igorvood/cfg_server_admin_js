@@ -8,8 +8,8 @@ import {useAppSelector} from "../hooks/redux";
 
 
 export function NewEditorTable() {
-
-    const {currentTableName: tableName} = useAppSelector(state => state.adminReducer)
+    const tableName = 'dict_topic_owner'
+    // const {currentTableName: tableName} = useAppSelector(state => state.adminReducer)
     const {isLoading: isLoadingTableData, isError: isErrorTableData, data: tableData} = useTableDataQuery(tableName)
 
 
