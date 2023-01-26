@@ -7,7 +7,10 @@ import {Box} from "@mui/material";
 
 
 export function NewEditorTable() {
-    const {isLoading: isLoadingTableData, isError: isErrorTableData, data: tableData} = useTableDataQuery('dict_arrow')
+
+    const tableName = 'dict_arrow'
+
+    const {isLoading: isLoadingTableData, isError: isErrorTableData, data: tableData} = useTableDataQuery(tableName)
 
 
     const getColumns = (td: ITableData) => {
