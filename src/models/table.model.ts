@@ -4,7 +4,7 @@ export interface IColumn {
     isInPrimaryKey: boolean;
 }
 
-export interface ITableData {
+export interface IDeleteTableData {
     beg_node_id: string;
     beg_node_type: string;
     common_name: string;
@@ -15,7 +15,19 @@ export interface ITableData {
     property_key: string;
 }
 
+export interface Col {
+    colName: string;
+    data: string;
+}
+
+export interface INewTableData {
+    cols: Col[];
+}
+
 export interface ITableData {
     columns: IColumn[];
-    tableData: ITableData[];
+    tableData: INewTableData[];
 }
+
+
+
