@@ -1,15 +1,26 @@
-import React from "react";
-import {DataGrid, GridToolbar} from "@mui/x-data-grid";
+import React, {useCallback} from "react";
+import {DataGrid, GridEditRowsModel, GridToolbar} from "@mui/x-data-grid";
 import {useTableDataQuery} from "../store/cfg/admin.api";
 import {ITableData} from "../models/table.model";
 import {GridEnrichedColDef} from "@mui/x-data-grid/models/colDef/gridColDef";
-import {Box} from "@mui/material";
+import {Alert, Box} from "@mui/material";
+import Badge from '@mui/material/Badge';
+import Stack from '@mui/material/Stack';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
 import {useAppSelector} from "../hooks/redux";
+import {useActions} from "../hooks/actions";
+import {GridEventListener} from "@mui/x-data-grid/models/events";
+import {GridEventsStr} from "@mui/x-data-grid/models/events/gridEvents";
+import {GridCellEditCommitParams} from "@mui/x-data-grid/models/params/gridEditCellParams";
+import {GridEditCellProps, GridEditRowProps} from "@mui/x-data-grid/models/gridEditRowModel";
 
 
 export function NewEditorTable() {
-    const tableName = 'dict_topic_owner'
+    // const tableName = 'dict_topic_owner'
+    const tableName = 'dict_arrow'
     // const {currentTableName: tableName} = useAppSelector(state => state.adminReducer)
+    const {editedData} = useAppSelector(state => state.adminReducer)
     const {isLoading: isLoadingTableData, isError: isErrorTableData, data: tableData} = useTableDataQuery(tableName)
 
 
@@ -57,6 +68,17 @@ export function NewEditorTable() {
             )
     }
 
+    // const [editRowsModel, setEditRowsModel] = React.useState({});
+    // const {editedData, setEditedData} = useAppSelector(state => state.adminReducer)
+    const {editedDataGlobalState} = useActions();
+
+    const handleEditRowsModelChange_2222222 = (gridCellEditCommitParams: GridCellEditCommitParams) =>{
+
+        const {id: editableId, field: editableField, value: editableValue} = gridCellEditCommitParams
+
+        editedDataGlobalState(gridCellEditCommitParams);
+    }
+
     return (
         <div style={{height: 1000, width: '100%'}}>
             {isLoadingTableData && <p className="text-center ">Loading...</p>}
@@ -82,7 +104,19 @@ export function NewEditorTable() {
                             fontWeight: '600',
                         },
                     }}
-                ><h4 className="text-center text-green-800">{tableData.tableComment + " ("+tableData.tableId+")"}</h4>
+                ><h4
+                    className="text-center text-green-800">{tableData.tableComment + " (" + tableData.tableId + ")"}</h4>
+                    <Alert severity="info" style={{marginBottom: 8}}>
+                        <code>editRowsModel: {JSON.stringify(editedData)}</code>
+                    </Alert>
+                    <Stack spacing={20} direction="row">
+                        <Badge badgeContent={4} color="error">
+                            <DoubleArrowIcon color="disabled"/>
+                        </Badge>
+                        <Badge badgeContent={40} color="error">
+                            <DeleteForeverIcon color="inherit"/>
+                        </Badge>
+                    </Stack>
                     <DataGrid autoHeight
                               checkboxSelection
                               style={{flex: 1}}
