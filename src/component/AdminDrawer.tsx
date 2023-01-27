@@ -4,15 +4,6 @@ import {useAppSelector} from "../hooks/redux";
 import {useActions} from "../hooks/actions";
 import {useTablesSetQuery} from "../store/cfg/admin.api";
 
-export interface ITable{
-    id: string
-    name: string
-}
-
-export interface ITables{
-    tablesss: ITable[]
-}
-
 export function AdminDrawer() {
 
     const {isLoading: isLoadingTables, isError: isErrorTables, data: tablesList} = useTablesSetQuery()

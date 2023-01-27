@@ -1,7 +1,7 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
-import {ITable} from "../../component/AdminDrawer";
+
 import {ServerResponse} from "http";
-import { ITableData} from "../../models/table.model";
+import {ISVG, ITable, ITableData} from "../../models/table.model";
 
 
 export const cfgApi = createApi({
@@ -20,6 +20,13 @@ export const cfgApi = createApi({
                 url: `/tableData/${tableName}`
             }),
         }),
+        pumlSVG: build.query<ISVG, void>({
+            query: () => ({
+                url: `/pumlSVG`
+            }),
+
+        }),
+
         // invalidateGroup: build.query<void, string>({
         //     query: (groupName: string) => ({
         //         url: `invalidate/${groupName}`
@@ -41,5 +48,4 @@ export const cfgApi = createApi({
 
 export const {useTablesSetQuery , useLazyTablesSetQuery} = cfgApi
 export const {useTableDataQuery , useLazyTableDataQuery} = cfgApi
-// export const {useGroupListLikeQuery} = tracerApi
-// export const {useLazyInvalidateGroupQuery} = tracerApi
+export const {usePumlSVGQuery , useLazyPumlSVGQuery} = cfgApi

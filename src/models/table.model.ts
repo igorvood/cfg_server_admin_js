@@ -31,5 +31,16 @@ export interface ITableData {
     tableData: INewTableData[];
 }
 
+export interface ITable{
+    id: string
+    name: string
+}
 
+export interface ITables{
+    tablesss: ITable[]
+}
+
+export interface ISVG{
+    svgData: string
+}
 
